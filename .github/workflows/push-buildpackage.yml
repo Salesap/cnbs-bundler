@@ -45,7 +45,8 @@ jobs:
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
       run: |
-        REPOSITORY="${GITHUB_REPOSITORY}"
+        # convert to lowercase
+        REPOSITORY="$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')"
         IMAGE="ghcr.io/${REPOSITORY}"
 
         echo "${DOCKER_PASSWORD}" | sudo skopeo login --username USERNAME --password-stdin ghcr.io
